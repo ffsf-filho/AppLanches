@@ -9,20 +9,4 @@
     Shell.TabBarBackgroundColor="#a90409"
     Shell.TabBarTitleColor="White"
     Shell.TabBarUnselectedColor="FloralWhite">
-
-    <TabBar>
-        <Tab Title="Home" Icon="home_svg">
-            <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" />
-        </Tab>
-        <Tab Title="Carrinho" Icon="shopping_cart_svg">
-            <ShellContent ContentTemplate="{DataTemplate pages:CarrinhoPage}" />
-        </Tab>
-        <Tab Title="Favoritos" Icon="favorite_svg">
-            <ShellContent ContentTemplate="{DataTemplate pages:FavoritosPage}" />
-        </Tab>
-        <Tab Title="Perfil" Icon="person_svg">
-            <ShellContent ContentTemplate="{DataTemplate pages:PerfilPage}" />
-        </Tab>
-    </TabBar>
-
 </Shell>
