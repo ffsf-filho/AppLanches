@@ -12,7 +12,7 @@
                    TextColor="#a90409" FontSize="Subtitle"/>
         </VerticalStackLayout>
         <Label Text="Categorias" Grid.Row="1" TextColor="#a90409" FontAttributes="Bold" FontSize="Medium" />
-        <CollectionView Grid.Row="2" x:Name="CvCategorias" SelectionMode="Single">
+        <CollectionView Grid.Row="2" x:Name="CvCategorias" SelectionMode="Single" SelectionChanged="CvCategorias_SelectionChanged">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="20" Orientation="Horizontal" />
             </CollectionView.ItemsLayout>

@@ -12,7 +12,7 @@ public class ApiService
 {
 	private readonly HttpClient _httpClient;
 	private readonly ILogger<ApiService> _logger;
-	private readonly string _baseUrl = "https://50h81fdr-7066.brs.devtunnels.ms/";
+	private readonly string _baseUrl = AppConfig.BaseUrl; //"https://50h81fdr-7066.brs.devtunnels.ms/";
 	JsonSerializerOptions _serializerOptions;
 
 	public ApiService(HttpClient httpClient, ILogger<ApiService> logger)
@@ -173,6 +173,12 @@ public class ApiService
 			_logger.LogError(ex, errorMessage);
 			return (default, errorMessage);
 		}
+	}
+
+	public async Task<(Produto? ProdutoDetalhe, string? ErrorMessage)> GetProdutoDetalhe(int produtoId)
+	{
+		string endpoint = $"api/produtos/{produtoId}";
+		return await GetAsync<Produto>(endpoint);
 	}
 
 	private void AddAutorizationHeader()
