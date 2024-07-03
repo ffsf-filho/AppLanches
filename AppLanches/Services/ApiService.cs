@@ -101,7 +101,36 @@ public class ApiService
 		}
 	}
 
-	public async Task<HttpResponseMessage> PostRequest(string uri, HttpContent httpContent)
+    public async Task<ApiResponse<bool>> AdicionaItemNoCarrinho(CarrinhoCompra carrinhoCompra)
+    {
+        try
+        {
+            string json = JsonSerializer.Serialize(carrinhoCompra, _serializerOptions);
+            StringContent content = new(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await PostRequest("api/ItensCarrinhoCompra", content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _logger.LogError($"Erro ao enviar requisição HTTP: {response.StatusCode}");
+                return new ApiResponse<bool>
+                {
+                    ErrorMessage = $"Erro ao enviar requisição HTTP: {response.StatusCode}"
+                };
+            }
+
+            return new ApiResponse<bool> { Data = true };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Erro ao adicionar item ao carrinho: {ex.Message}");
+            return new ApiResponse<bool>
+            {
+                ErrorMessage = ex.Message
+            };
+        }
+    }
+
+    public async Task<HttpResponseMessage> PostRequest(string uri, HttpContent httpContent)
 	{
 		string enderecoUrl = _baseUrl + uri;
 

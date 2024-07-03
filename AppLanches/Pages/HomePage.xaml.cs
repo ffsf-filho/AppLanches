@@ -118,7 +118,7 @@ public partial class HomePage : ContentPage
 
 	private void CvCategorias_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		Categoria currentSelection = e.CurrentSelection.FirstOrDefault() as Categoria;
+		Categoria? currentSelection = e.CurrentSelection.FirstOrDefault() as Categoria;
 
 		if(currentSelection == null) { return;}
 
@@ -126,5 +126,34 @@ public partial class HomePage : ContentPage
 			new ListaProdutosPage(currentSelection.Id, currentSelection.Nome!, _apiService, _validator)
 			);
 		((CollectionView) sender).SelectedItem = null;
+    }
+
+    private void CvMaisVendidos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+		if(sender is CollectionView collectionView)
+		{
+			NavigateTOProdutoDetalhesPage(collectionView, e);
+		}
+    }
+
+    private void CvPopulares_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is CollectionView collectionView)
+        {
+            NavigateTOProdutoDetalhesPage(collectionView, e);
+        }
+    }
+
+    private void NavigateTOProdutoDetalhesPage(CollectionView collectionView, SelectionChangedEventArgs e)
+    {
+		Produto? currentSelection = e.CurrentSelection.FirstOrDefault() as Produto;
+
+        if (currentSelection == null) { return; }
+
+        Navigation.PushAsync(
+            new ProdutoDetalhesPage(currentSelection.Id, currentSelection.Nome!, _apiService, _validator)
+            );
+
+		collectionView.SelectedItem = null;
     }
 }
