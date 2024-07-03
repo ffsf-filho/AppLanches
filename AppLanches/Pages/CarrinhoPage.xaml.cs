@@ -6,4 +6,9 @@ public partial class CarrinhoPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void BtnEditaEndereco_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }
