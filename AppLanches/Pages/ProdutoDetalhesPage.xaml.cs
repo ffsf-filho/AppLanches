@@ -124,7 +124,7 @@ public partial class ProdutoDetalhesPage : ContentPage
 		}
 		catch (Exception ex)
 		{
-            DisplayAlert("Erro", $"Ocorreu um erro: {ex.Message}", "OK");
+            await DisplayAlert("Erro", $"Ocorreu um erro: {ex.Message}", "OK");
         }
 	}
 
