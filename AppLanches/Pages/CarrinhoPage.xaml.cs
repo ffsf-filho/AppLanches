@@ -25,6 +25,46 @@ public partial class CarrinhoPage : ContentPage
 		await GetItensCarrinhoCompra();
     }
 
+    private async void BtnIncrementar_Clicked(object sender, EventArgs e)
+    {
+		if (sender is Button button && button.BindingContext is CarrinhoCompraItem itemCarrinho)
+		{
+			itemCarrinho.Quantidade++;
+			AtualizaPrecoTotal();
+			await _apiService.AtualizaQuantidadeItemCarrinho(itemCarrinho.ProdutoId, "aumentar");
+		}
+    }
+
+    private async void BtnDecrementar_Clicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.BindingContext is CarrinhoCompraItem itemCarrinho)
+        {
+			if(itemCarrinho.Quantidade == 1)
+			{
+				return;
+			}
+
+            itemCarrinho.Quantidade--;
+            AtualizaPrecoTotal();
+            await _apiService.AtualizaQuantidadeItemCarrinho(itemCarrinho.ProdutoId, "diminuir");
+        }
+    }
+
+    private async void BtnDeletar_Clicked(object sender, EventArgs e)
+    {
+        if (sender is ImageButton button && button.BindingContext is CarrinhoCompraItem itemCarrinho)
+        {
+            bool resposta = await DisplayAlert("Confirmação", "Tem certeza que deseja excluir este item do carrinho?", "Sim", "Não");
+
+            if (resposta)
+            {
+                ItensCarrinhoCompra.Remove(itemCarrinho);
+                AtualizaPrecoTotal();
+                await _apiService.AtualizaQuantidadeItemCarrinho(itemCarrinho.ProdutoId, "deletar");
+            }
+        }
+    }
+
     private void BtnEditaEndereco_Clicked(object sender, EventArgs e)
     {
 

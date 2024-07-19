@@ -1,4 +1,5 @@
-﻿using AppLanches.Models;
+﻿using Android.App.AppSearch;
+using AppLanches.Models;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Net.Http.Headers;
@@ -135,6 +136,45 @@ public class ApiService
 		string endpoint = $"api/ItensCarrinhoCompra/{usuarioId}";
 		return await GetAsync<List<CarrinhoCompraItem>>(endpoint);
 	}
+	
+	public async Task<(bool data, string? ErrorMessage)> AtualizaQuantidadeItemCarrinho(int produtoId, string acao)
+	{
+		try
+		{
+			StringContent content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+			HttpResponseMessage response = await PutRequest($"api/itensCarrinhoCompra?produtoId={produtoId}&acao={acao}", content);
+
+			if (response.IsSuccessStatusCode)
+			{
+				return (true, null);
+			}
+			else
+			{
+				if (response.StatusCode == HttpStatusCode.Unauthorized)
+				{
+					string errorMessage = "Unauthorized";
+					_logger.LogWarning(errorMessage);
+					return (false, errorMessage);
+				}
+
+				string generalErrorMessage = $"Errro na requisição: {response.ReasonPhrase}";
+				_logger.LogError(generalErrorMessage);
+				return (false, generalErrorMessage);
+			}
+		}
+		catch (HttpRequestException ex)
+		{
+			string errorMessage = $"Errro de requisição HTTP: {ex.Message}";
+			_logger.LogError(ex, errorMessage);
+			return (false, errorMessage);
+		}
+		catch (Exception ex)
+		{
+            string errorMessage = $"Errro inesperado: {ex.Message}";
+            _logger.LogError(ex, errorMessage);
+            return (false, errorMessage);
+        }
+	}
 
     public async Task<HttpResponseMessage> PostRequest(string uri, HttpContent httpContent)
 	{
@@ -148,6 +188,23 @@ public class ApiService
 		catch (Exception ex)
 		{
 			_logger.LogError($"Erro ao enviar requisição POST para {uri}: {ex.Message}");
+			return new HttpResponseMessage(HttpStatusCode.BadRequest);
+		}
+	}
+
+	public async Task<HttpResponseMessage> PutRequest(string uri, HttpContent content)
+	{
+		string enderecoUrl = AppConfig.BaseUrl + uri;
+
+		try
+		{
+			AddAutorizationHeader();
+			HttpResponseMessage result = await _httpClient.PutAsync(enderecoUrl, content);
+			return result;
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError($"Erro ao enviar requisição PUT para {uri}: {ex.Message}");
 			return new HttpResponseMessage(HttpStatusCode.BadRequest);
 		}
 	}

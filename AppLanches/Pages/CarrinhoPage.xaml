@@ -23,13 +23,13 @@
                             <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Spacing="10">
                                 <Button HeightRequest="25" WidthRequest="25" CornerRadius="8" BackgroundColor="White"
                                         TextColor="Black" BorderColor="Black" BorderWidth="1" Text="-" Padding="0"
-                                        FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" x:Name="BtnDecrementar" />
+                                        FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" x:Name="BtnDecrementar" Clicked="BtnDecrementar_Clicked" />
                                 <Label x:Name="LblQuantidade" TextColor="#80574D" FontAttributes="Bold" VerticalTextAlignment="Center" Text="{Binding Quantidade}"/>
                                 <Button HeightRequest="25" WidthRequest="25" CornerRadius="8" BackgroundColor="#18565f"
-                                        Text="+" Padding="0" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" x:Name="BtnIncrementar" />
+                                        Text="+" Padding="0" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" x:Name="BtnIncrementar" Clicked="BtnIncrementar_Clicked" />
                             </HorizontalStackLayout>
                             <ImageButton Grid.Row="2" Grid.Column="2" HeightRequest="25" WidthRequest="25" Source="delete_svg" 
-                                         Padding="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="BtnDeletar" />
+                                         Padding="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="BtnDeletar" Clicked="BtnDeletar_Clicked" />
                         </Grid>
                     </Frame>
                 </DataTemplate>
