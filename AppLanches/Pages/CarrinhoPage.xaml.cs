@@ -23,6 +23,21 @@ public partial class CarrinhoPage : ContentPage
     {
         base.OnAppearing();
 		await GetItensCarrinhoCompra();
+
+        bool enderecoSlavo = Preferences.ContainsKey("endereco");
+        
+        if (enderecoSlavo)
+        {
+            string nome = Preferences.Get("nome", string.Empty);
+            string endereco = Preferences.Get("endereco", string.Empty);
+            string telefone = Preferences.Get("telefone", string.Empty);
+
+            LblEndereco.Text = $"{nome}\n{endereco} \n{telefone}";
+        }
+        else
+        {
+            LblEndereco.Text = "Informe o seu endereço.";
+        }
     }
 
     private async void BtnIncrementar_Clicked(object sender, EventArgs e)
@@ -67,7 +82,7 @@ public partial class CarrinhoPage : ContentPage
 
     private void BtnEditaEndereco_Clicked(object sender, EventArgs e)
     {
-
+        Navigation.PushAsync(new EnderecoPage());
     }
 
 	private async Task<IEnumerable<CarrinhoCompraItem>> GetItensCarrinhoCompra()
