@@ -61,7 +61,7 @@
                            FontAttributes="Bold" TextColor="White" />
                     <Image Source="trending_flat_white_svg" HeightRequest="25" WidthRequest="25" VerticalOptions="Center" />
                     <HorizontalStackLayout.GestureRecognizers>
-                        <TapGestureRecognizer x:Name="TapConfirmarPedido" />
+                        <TapGestureRecognizer x:Name="TapConfirmarPedido" Tapped="TapConfirmarPedido_Tapped" />
                     </HorizontalStackLayout.GestureRecognizers>
                 </HorizontalStackLayout>
             </Grid>
