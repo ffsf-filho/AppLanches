@@ -56,7 +56,7 @@ public partial class PerfilPage : ContentPage
 
     private void TapMeusPedidos_Tapped(object sender, TappedEventArgs e)
     {
-
+        Navigation.PushAsync(new PedidosPage(_apiService,_validator));
     }
 
     private void TapMinhaConta_Tapped(object sender, TappedEventArgs e)

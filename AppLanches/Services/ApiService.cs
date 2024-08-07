@@ -279,6 +279,18 @@ public class ApiService
         return await GetAsync<List<Produto>>(endpoint);
     }
 
+    public async Task<(List<PedidoPorUsuario>?, string? ErrorMessage)> GetPedidoPorUsuario(int usuarioId)
+    {
+        string endpoint = $"api/Pedidos/PedidosPorUsuario/{usuarioId}";
+        return await GetAsync<List<PedidoPorUsuario>>(endpoint);
+    }
+
+    public async Task<(List<PedidoDetalhe>?, string? ErroMessage)> GetPedidoDetalhes(int pedidoId)
+    {
+        string endpoint = $"api/Pedidos/DetalhesPedido/{pedidoId}";
+        return await GetAsync<List<PedidoDetalhe>>(endpoint);
+    }
+
     private async Task<(T? Data, string? ErrorMessage)> GetAsync<T>(string endpoint)
     {
         try
