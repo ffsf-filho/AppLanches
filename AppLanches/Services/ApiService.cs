@@ -197,7 +197,7 @@ public class ApiService
         {
             string errorMessage = $"Erro ao confirmar pedido: {ex.Message}";
             _logger.LogError(ex, errorMessage);
-            return new ApiResponse<bool> {ErrorMessage = ex.Message };
+            return new ApiResponse<bool> { ErrorMessage = ex.Message };
         }
     }
 
@@ -222,10 +222,10 @@ public class ApiService
                     : $"Erro ao enviar requisição HTTP: {response.StatusCode}";
 
                 _logger.LogError($"Erro ao enviar requisição HTTP: {response.StatusCode}");
-                return new ApiResponse<bool> {ErrorMessage = erroMessage };
+                return new ApiResponse<bool> { ErrorMessage = erroMessage };
             }
 
-            return new ApiResponse<bool> {Data = true};
+            return new ApiResponse<bool> { Data = true };
         }
         catch (Exception ex)
         {
