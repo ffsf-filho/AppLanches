@@ -21,7 +21,7 @@ public partial class AppShell : Shell
 	{
 		HomePage homePage = new HomePage(_apiService, _validator);
 		CarrinhoPage carrinhoPage = new CarrinhoPage(_apiService, _validator);
-		FavoritosPage favoriosPage = new FavoritosPage();
+		FavoritosPage favoriosPage = new FavoritosPage(_apiService, _validator);
 		PerfilPage perfilPage = new PerfilPage(_apiService, _validator);
 
 		Items.Add(new TabBar 

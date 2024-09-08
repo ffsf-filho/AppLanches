@@ -3,38 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppLanches.Pages.PedidoDetalhesPage"
              Title="Detalhes do Pedido">
-    <CollectionView x:Name="CvPedidosDetalhes" Margin="20">
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
-        </CollectionView.ItemsLayout>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Border Padding="15" Stroke="#87A7AC" StrokeShape="RoundRectangle 10">
-                    <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="2*, 8*" ColumnSpacing="10">
-                        <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" VerticalOptions="Start" 
-                               Aspect="Fill" HeightRequest="60" WidthRequest="60" Source="{Binding CaminhoImagem}" />
-                        
-                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding ProdutoNome}" />
-                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding ProdutoPreco, StringFormat='R{0:C'}" />
-                        <Label Grid.Row="2" Grid.Column="1">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <FormattedString.Spans>
-                                        <Span Text="x " />
-                                        <Span Text="{Binding Quantidade}" />
-                                    </FormattedString.Spans>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                    </Grid>
-                </Border>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-        <CollectionView.Footer>
-            <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
-                <Label Text="Preço Total :" />
-                <Label x:Name="LblPrecoTotal" />
-            </HorizontalStackLayout>
-        </CollectionView.Footer>
-    </CollectionView>
+    <VerticalStackLayout>
+        <ActivityIndicator x:Name="loadIndicator" IsRunning="False" IsVisible="False" Color="Blue"
+                           HorizontalOptions="Center" VerticalOptions="Center"/>
+        
+        <CollectionView x:Name="CvPedidosDetalhes" Margin="20">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="15" Stroke="#87A7AC" StrokeShape="RoundRectangle 10">
+                        <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="2*, 8*" ColumnSpacing="10">
+                            <Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" VerticalOptions="Start" 
+                                   Aspect="Fill" HeightRequest="60" WidthRequest="60" Source="{Binding CaminhoImagem}" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding ProdutoNome}" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding ProdutoPreco, StringFormat='R{0:C'}" />
+                            <Label Grid.Row="2" Grid.Column="1">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <FormattedString.Spans>
+                                            <Span Text="x " />
+                                            <Span Text="{Binding Quantidade}" />
+                                        </FormattedString.Spans>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.Footer>
+                <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                    <Label Text="Preço Total :" />
+                    <Label x:Name="LblPrecoTotal" />
+                </HorizontalStackLayout>
+            </CollectionView.Footer>
+        </CollectionView>
+    </VerticalStackLayout>
 </ContentPage>
